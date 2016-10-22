@@ -95,9 +95,25 @@ object LineOfSight {
    *  `until`, and computes the maximum angle for each entry of the output array,
    *  given the `startingAngle`.
    */
+
+  // 'a0' is the reduce of all elements left to tree 't'
+//  def downsweep[A](t: TreeRes[A], a0: A, f: (A, A) => A): Tree[A] = t match {
+//    case LeafRes(a) => Leaf(f(a0, a))
+//    case NodeRes(l, _, r) => {
+//      //
+//      val (tL, tR) = parallel(downsweep(l, a0, f), downsweep(r, f(a0, l.res), f))
+//      Node(tL, tR)
+//    }
+//  }
+
+
   def downsweepSequential(input: Array[Float], output: Array[Float],
     startingAngle: Float, from: Int, until: Int): Unit = {
-    ???
+    if(from < until){
+      val mx = max(input(from) / from, startingAngle)
+      output(from) = mx
+      downsweepSequential(input, output, mx, from + 1, until)
+    }
   }
 
   /** Pushes the maximum angle in the prefix of the array to each leaf of the

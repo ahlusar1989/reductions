@@ -84,7 +84,5 @@ object ParallelParenthesesBalancing {
     reduce(0, chars.length) == (0, 0)
   }
 
-  // For those who want more:
-  // Prove that your reduction operator is associative!
 
 }
